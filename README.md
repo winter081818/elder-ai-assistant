@@ -20,10 +20,11 @@ docker compose up --build
 ## 交付内容
 
 - `PRODUCT.md`：需求依据、范围、信息架构、AI 规则、指标和走查记录。
+- `MANUAL_ACCEPTANCE.md`：用户手动验收与实际 Docker/HTTP/测试记录。
 - `prototype-screens/`：P01–P12（含成功、拒绝、取消等状态）对应的静态原型画面（PNG）。
 - `index.html`、`app.js`、`styles.css`：完整可编辑原型源码。
 - `Dockerfile`、`docker-compose.yml`：Docker 前端演示。
 
 ## 页面和状态清单
 
-见 `PRODUCT.md` 的 P01–P11。所有导航按钮与流程内操作均有可访问画面；原型中出现的数据与状态为预设模拟，不调用真实 AI、消息或医疗服务。
+见 `PRODUCT.md` 的 P01–P12。所有导航按钮与流程内操作均有可访问画面；原型中出现的数据与状态为预设模拟，不调用真实 AI、消息或医疗服务。
