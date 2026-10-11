@@ -22,4 +22,18 @@ function cancelRequest(){s.request.status='cancelled';s.notice='已撤回协作�
 function bind(){document.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>{s.notice='';route(x.dataset.go)});document.querySelectorAll('[data-role]').forEach(x=>x.onclick=()=>{s.role=x.dataset.role;s.notice='';route(s.role==='elder'?'home':'family')});document.querySelectorAll('[data-action]').forEach(x=>x.onclick=()=>action(x.dataset.action));}
 function route(v){({home,history,privacy,family,new:newTask,voice,understand,assist,authorize,complete})[v]?.();}
 function action(v){ if(v==='voice')voice();else if(v==='voice-error')voice(true);else if(v==='new')newTask();else if(v==='understand')understand();else if(v==='assist')assist();else if(v==='authorize')authorize();else if(v==='send')send();else if(v==='complete')complete();else if(v==='cancel')cancel();else if(v==='cancel-request')cancelRequest();else if(v==='accept'){s.request.status='accepted';s.role='elder';result('小林答应陪您去','她已安排好下周二上午 9:30 陪您去社区医院。');}else if(v==='decline'){s.request.status='declined';s.role='elder';result('小林这次不方便','她已收到消息。您可以改为自己去，或修改时间后再请她帮忙。');}else if(v==='elder-home'){s.role='elder';home();}}
-home();
+const screen = new URLSearchParams(location.search).get('screen');
+if(screen==='voice') voice();
+else if(screen==='voiceerror') voice(true);
+else if(screen==='edit') newTask();
+else if(screen==='understand') { s.request.title='去社区医院复诊';s.request.date='下周二 上午 9:30';understand(); }
+else if(screen==='assist') { s.request.title='去社区医院复诊';s.request.date='下周二 上午 9:30';assist(); }
+else if(screen==='authorize') { s.request.title='去社区医院复诊';s.request.date='下周二 上午 9:30';authorize(); }
+else if(screen==='history') { s.request.title='去社区医院复诊';s.request.date='下周二 上午 9:30';s.request.status='pending';history(); }
+else if(screen==='family') { s.request.title='去社区医院复诊';s.request.date='下周二 上午 9:30';s.request.status='pending';s.role='family';family(); }
+else if(screen==='privacy') privacy();
+else if(screen==='created') result('提醒已创建','当天上午 8:30 会提醒您。');
+else if(screen==='accepted') result('小林答应陪您去','她已安排好下周二上午 9:30 陪您去社区医院。');
+else if(screen==='declined') result('小林这次不方便','她已收到消息。您可以改为自己去，或修改时间后再请她帮忙。');
+else if(screen==='cancelled') { s.request.title='去社区医院复诊';s.request.date='下周二 上午 9:30';s.request.status='cancelled';history(); }
+else home();
